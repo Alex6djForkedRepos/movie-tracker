@@ -33,16 +33,14 @@ services:
     depends_on:
       - postgres
     environment:
-      DB_CHECKSUM: none
-      COMPRESSION: GZ
+      DEFAULT_CHECKSUM: NONE
       DEFAULT_ENCRYPT: "false"
       CONTAINER_ENABLE_MONITORING: "false"
-      DB_BACKUP_LOCATION: s3
+      DEFAULT_BACKUP_LOCATION: s3
       DEFAULT_BACKUP_INTERVAL: 480
       DEFAULT_COMPRESSION: GZ
-      DEFAULT_EXTRA_OPTS: --inserts --data-only
 
-      DB01_TYPE: pgsql
+      DB01_TYPE: postgres
       DB01_HOST: postgres
       DB01_NAME: movietracker
       DB01_USER: spaceman

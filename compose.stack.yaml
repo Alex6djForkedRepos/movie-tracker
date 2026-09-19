@@ -27,7 +27,7 @@ services:
         constraints:
           - node.role == manager
   backup:
-    image: tiredofit/db-backup
+    image: nfrastack/db-backup:latest
     env_file:
       - .env
     depends_on:

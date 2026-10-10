@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { NuxtLink } from "#components"
+import { computed } from "vue"
 import { UiIcon } from "~/shared/ui/UiIcon"
 import { UiImage } from "~/shared/ui/UiImage"
 import { UiTrimmedText } from "~/shared/ui/UiTrimmedText"
@@ -18,6 +19,16 @@ interface UiInfoHeaderProps {
 
 const props = defineProps<UiInfoHeaderProps>()
 const slots = defineSlots()
+
+const backgroundImage = computed(() => {
+  const src = props.image || props.fallbackImage
+
+  if (!src) {
+    return ""
+  }
+
+  return src.replace(/([?&]size=)\d+/, "$132")
+})
 </script>
 
 <template>
@@ -46,7 +57,7 @@ const slots = defineSlots()
       <div
         :class="$style.backgroundCircle"
         :style="{
-          '--background-color': `url(${props.image || props.fallbackImage})`,
+          '--background-color': `url(${backgroundImage})`,
         }"
       />
 
@@ -59,7 +70,7 @@ const slots = defineSlots()
           <div
             :class="$style.backgroundCircle"
             :style="{
-              '--background-color': `url(${props.image || props.fallbackImage})`,
+              '--background-color': `url(${backgroundImage})`,
             }"
           />
           <div

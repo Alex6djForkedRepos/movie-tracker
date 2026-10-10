@@ -13,9 +13,13 @@ interface UiImageProps {
   provider?: string
   placeholder?: boolean | string | number
   modifiers?: Record<string, any>
+  loading?: "lazy" | "eager"
+  fetchpriority?: "high" | "low" | "auto"
 }
 
-const props = defineProps<UiImageProps>()
+const props = withDefaults(defineProps<UiImageProps>(), {
+  loading: "lazy",
+})
 const imageSrc = ref(props.src ?? props.fallbackSrc ?? "/defaultMoviePoster.svg")
 
 function handleImageLoadingError() {
@@ -27,7 +31,8 @@ function handleImageLoadingError() {
   <NuxtImg
     :class="$style.body"
     :src="imageSrc"
-    loading="lazy"
+    :loading="props.loading"
+    :fetchpriority="props.fetchpriority"
     decoding="async"
     @error="handleImageLoadingError"
   />
